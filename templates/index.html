@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+		<meta charset="UTF-8">
+		<title>Book Recommendation</title>
+	</head>
+	<body>
+		<h1>Book recommendation</h1>
+		<form action="greet" method="post">
+
+			<p>What is your favorite book?</p>
+			<br>
+			<div style="text-align:center;">
+			<input type="text" name="name_input">
+			<input type="submit" value="Submit" id="greet">
+			</div>
+
+			{% with message = get_flashed_messages(category_filter=["title"]) %}
+			<h2> If this is not your book, please to more specify name of the title </h2>
+				<div class="grid-item">
+					<img src= {{message[0][0][1]}} />
+					<h3>{{message[0][0][0]}}</h3>
+				</div>
+			
+			{% endwith %}
+			<hr>
+			<h2>Recommendations for you:</h2>
+			<section class="product-grid">
+
+				{% for message in get_flashed_messages()[1:]%}
+					<div class="grid-item">
+						<img src= {{message[1]}} />
+						<h3>{{message[0]}}</h3>
+					</div>
+				{% endfor %}
+			</section>
+		</form>
+	
+	</body>
+</html?
