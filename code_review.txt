@@ -1,0 +1,6 @@
+Code has lots of comments, but many of them are not necessary ("empty lists") or in more complex parts are just present without sufficent explanation ("corr computation").
+Names of variables are mostly ok, I would prefer if type of object was more obvious from name of variable (ratings -> ratings_df).
+Repeatedly typing full name of book insted of storing name in variable.
+It looks like parts of code are prepeared to work with multiple favorite books  but other parts not.
+Pandas sereis is possible convert to np array "set" by method unique, It is not needed to convert it to list and to unique np array - books_df[books_df['Book-Title'].str.contains("lord of the rings", case=False)==True]['Book-Title'].unique().
+Code is not structured at all and reusability is very low. Solution is "hardcoded" for one specific input and use it for different book is quite difficult but works as it should.

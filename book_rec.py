@@ -42,6 +42,7 @@ def name_to_isbn(name, books_df):
     return books_df[books_df['Book-Title'] == best_results[0][0]]['ISBN'].head(1).item()
 
 def recommend_books(book_isbn, books_to_compare, readers_of_book, books_df, ratings_df):
+    """Computes recommendations of books based on correlation of how readers liked other books, returns dataframe including up to 10 recommendation"""
     ratings_data_raw =  pd.merge(ratings_df, books_df, on=['ISBN'])[['User-ID', 'Average-Rating', 'ISBN', 'Book-Rating']]
     ratings_data_raw_nodup = ratings_data_raw[ratings_data_raw['ISBN'].isin(books_to_compare)][ratings_data_raw['User-ID'].isin(readers_of_book)]
     dataset_for_corr = ratings_data_raw_nodup.pivot(index='User-ID', columns='ISBN', values='Book-Rating')
